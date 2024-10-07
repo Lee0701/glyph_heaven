@@ -1,2 +1,10 @@
-<h2>Tag {{ tag.name }}</h2>
+
 {% include 'glyphs/glyphs.html' with glyphs=glyphs %}
+<dl>
+    <dt>Name</dt>
+    <dd>{{ tag.name }}</dd>
+    <dt>Author</dt>
+    <dd>{{ tag.author }}</dd>
+    <dt>Tags</dt>
+    <dd>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</dd>
+</dl>

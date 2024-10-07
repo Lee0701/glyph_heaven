@@ -25,6 +25,11 @@ class UploadForm(forms.ModelForm):
         tags = self.cleaned_data['tags'].split()
         for tagname in tags:
             tag, created = Tag.objects.get_or_create(name=tagname)
+            if created:
+                tag.author = self.author
+                tag.author_name = self.author_name
+                tag.author_ip = self.author_ip
+            tag.save(commit)
             glyph.tags.add(tag)
         return glyph
 

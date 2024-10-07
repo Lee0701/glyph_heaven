@@ -6,6 +6,9 @@ from .image_funcs import image_url, upload_to
 # Create your models here.
 
 class Tag(models.Model):
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author_name = models.CharField(max_length=100, blank=True)
+    author_ip = models.GenericIPAddressField()
     name = models.CharField(max_length=100, primary_key=True)
     description = models.TextField(blank=True)
     tags = models.ManyToManyField('self', symmetrical=False, blank=True)
