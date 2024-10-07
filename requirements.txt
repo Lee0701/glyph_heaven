@@ -1,0 +1,4 @@
+Django==4.2.16
+django-browser-reload==1.15.0
+django-tailwind==3.6.0
+Pillow==9.5.0
