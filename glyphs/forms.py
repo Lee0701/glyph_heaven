@@ -9,7 +9,6 @@ class UploadForm(forms.ModelForm):
         super(UploadForm, self).__init__(*args, **kwargs)
 
     image = forms.FileField(required=True)
-    kage = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
     tags = forms.CharField(required=True)
 
@@ -22,18 +21,18 @@ class UploadForm(forms.ModelForm):
 
         tags = self.cleaned_data['tags'].split()
         for tagname in tags:
-            tag, created = Tag.objects.get_or_create(name=tagname)
+            tag, created = Tag.objects.get_or_create(
+                name=tagname,
+                defaults={'author': self.author, 'author_name': self.author_name, 'author_ip': self.author_ip}
+            )
             if created:
-                tag.author = self.author
-                tag.author_name = self.author_name
-                tag.author_ip = self.author_ip
                 tag.save(commit)
             glyph.tags.add(tag)
         return glyph
 
     class Meta:
         model = Glyph
-        fields = ['image', 'kage', 'description', 'tags']
+        fields = ['image', 'description', 'tags']
 
 class EditGlyphForm(forms.Form):
     def __init__(self, *args, **kwargs):
