@@ -6,9 +6,10 @@ class UploadForm(forms.ModelForm):
         self.author = kwargs.pop('author')
         self.author_name = self.author.username
         self.author_ip = kwargs.pop('author_ip')
+
         super(UploadForm, self).__init__(*args, **kwargs)
 
-    image = forms.FileField(required=True)
+    image = forms.ImageField(required=True)
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
     tags = forms.CharField(required=True)
 
@@ -21,18 +22,42 @@ class UploadForm(forms.ModelForm):
 
         tags = self.cleaned_data['tags'].split()
         for tagname in tags:
-            tag, created = Tag.objects.get_or_create(
+            tag, _ = Tag.objects.get_or_create(
                 name=tagname,
                 defaults={'author': self.author, 'author_name': self.author_name, 'author_ip': self.author_ip}
             )
-            if created:
-                tag.save(commit)
             glyph.tags.add(tag)
         return glyph
 
     class Meta:
         model = Glyph
         fields = ['image', 'description', 'tags']
+
+class SimpleUploadForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author')
+        self.author_name = self.author.username
+        self.author_ip = kwargs.pop('author_ip')
+        self.tag = kwargs.pop('tag')
+
+        super(SimpleUploadForm, self).__init__(*args, **kwargs)
+
+    image = forms.ImageField(required=True)
+
+    def save(self, commit=True):
+        glyph = super(SimpleUploadForm, self).save(commit=False)
+        glyph.author = self.author
+        glyph.author_name = self.author_name
+        glyph.author_ip = self.author_ip
+        glyph.save(commit)
+
+        glyph.tags.add(self.tag)
+
+        return glyph
+
+    class Meta:
+        model = Glyph
+        fields = ['image']
 
 class EditGlyphForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -56,12 +81,10 @@ class EditGlyphForm(forms.Form):
         self.glyph.tags.clear()
         tags = self.cleaned_data['tags'].split()
         for tagname in tags:
-            tag, created = Tag.objects.get_or_create(
+            tag, _ = Tag.objects.get_or_create(
                 name=tagname,
                 defaults={'author': self.author, 'author_name': self.author_name, 'author_ip': self.author_ip}
             )
-            if created:
-                tag.save(commit)
             self.glyph.tags.add(tag)
 
         return self.glyph
@@ -91,12 +114,10 @@ class EditTagForm(forms.Form):
         self.tag.tags.clear()
         tags = self.cleaned_data['tags'].split()
         for tagname in tags:
-            tag, created = Tag.objects.get_or_create(
+            tag, _ = Tag.objects.get_or_create(
                 name=tagname,
                 defaults={'author': self.author, 'author_name': self.author_name, 'author_ip': self.author_ip}
             )
-            if created:
-                tag.save(commit)
             self.tag.tags.add(tag)
 
         return self.tag
