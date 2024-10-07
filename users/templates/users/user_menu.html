@@ -1,0 +1,24 @@
+{% csrf_token %}
+<div>
+    <p>
+        {% if user.is_authenticated %}
+            Hello, {{ user.get_username }}!
+        {% else %}
+            Hello, World!
+        {% endif %}
+        This is the glyph heaven.
+    </p>
+
+    <div>
+        {% if user.is_authenticated %}
+            {% include 'users/form_button.html' with url='logout' label='Logout' method='post' %}
+        {% else %}
+            {% include 'users/form_button.html' with url='login' label='Login' %}
+            {% include 'users/form_button.html' with url='register' label='Register' %}
+        {% endif %}
+    
+        {% if user.is_superuser %}
+        {% include 'users/form_button.html' with url='admin:index' label='Admin' %}
+        {% endif %}
+    </div>
+</div>

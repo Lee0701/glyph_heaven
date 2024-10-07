@@ -1,0 +1,14 @@
+
+<img src="{{ glyph.image_url }}">
+<p>By {{ glyph.author.username }}</p>
+<pre>{{ glyph.kage }}</pre>
+<div>
+    {{ glyph.description }}
+</div>
+<ul>
+    {% for tag in glyph.tags.all %}
+        <li>
+            <a href="{{ tag.href }}">{{ tag.name }}</a>
+        </li>
+    {% endfor %}
+</ul>

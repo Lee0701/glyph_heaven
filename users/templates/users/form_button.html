@@ -1,0 +1,6 @@
+<form action="{% url url %}" method="{{ method | default:'get'}}">
+    {% if method == 'post' %}
+        {% csrf_token %}
+    {% endif %}
+    <input type="submit" value="{{ label }}">
+</form>
