@@ -18,7 +18,7 @@ class Tag(models.Model):
     def href(self):
         return f'/glyphs/tag/{self.name}'
 
-    def includes(self):
+    def rev_tags(self):
         return Tag.objects.filter(tags=self)
 
 class Glyph(models.Model):

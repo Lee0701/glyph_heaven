@@ -11,8 +11,8 @@
     <dd><pre>{{ tag.kage }}</pre></dd>
     <dt>Description</dt>
     <dd><div>{{ tag.description }}</div></dd>
-    <dt>Has Tags</dt>
-    <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
-    <dt>Includes Tags</dt>
-    <dd>{% include 'glyphs/tags.html' with tags=tag.includes.all %}</dd>
+    <dt>Tags</dt>
+    <dd><ul>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</ul></dd>
+    <dt>Tagged By</dt>
+    <dd><ul>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</ul></dd>
 </dl>

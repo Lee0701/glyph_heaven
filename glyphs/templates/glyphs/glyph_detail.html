@@ -8,5 +8,5 @@
     <dt>Description</dt>
     <dd><div>{{ glyph.description }}</div></dd>
     <dt>Tags</dt>
-    <dd>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</dd>
+    <dd><ul>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</ul></dd>
 </dl>
