@@ -16,7 +16,7 @@ class UploadForm(forms.ModelForm):
     tags = forms.CharField(required=True)
 
     def save(self, commit=True):
-        glyph = super(forms.ModelForm, self).save(commit=False)
+        glyph = super(UploadForm, self).save(commit=False)
         glyph.author = self.author
         glyph.author_name = self.author_name
         glyph.author_ip = self.author_ip
@@ -29,7 +29,7 @@ class UploadForm(forms.ModelForm):
                 tag.author = self.author
                 tag.author_name = self.author_name
                 tag.author_ip = self.author_ip
-            tag.save(commit)
+                tag.save(commit)
             glyph.tags.add(tag)
         return glyph
 
