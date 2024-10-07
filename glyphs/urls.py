@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('id/<int:id>', views.detail, name='detail'),
     path('tag/<str:tag>', views.tag, name='tag'),
+    path('upload/', views.upload, name='upload'),
 ]
 
 urlpatterns += chain.from_iterable([
