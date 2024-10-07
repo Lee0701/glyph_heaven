@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
 from . import views
 
 urlpatterns = [
@@ -24,5 +23,6 @@ urlpatterns = [
     path('glyphs/', include('glyphs.urls')),
     path('user/', include('users.urls')),
     path('admin/', admin.site.urls),
+    path('theme/', include('theme.urls')),
     path('__reload__/', include('django_browser_reload.urls')),
 ]

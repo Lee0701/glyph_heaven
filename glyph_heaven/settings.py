@@ -33,9 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'glyphs.apps.GlyphsConfig',
+    'theme.apps.ThemeConfig',
 
-    'tailwind',
-    'theme',
     'django_browser_reload',
 
     'django.contrib.admin',
@@ -137,13 +136,4 @@ UPLOAD_DIR = 'data/images/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-TAILWIND_APP_NAME = 'theme'
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
-
-NPM_BIN_PATH = 'npm.cmd'
 
