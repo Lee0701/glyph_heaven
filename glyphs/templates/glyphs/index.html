@@ -1,3 +1,6 @@
-{% include 'users/user_menu.html' %}
+{% extends 'glyphs/base.html' %}
 
-{% include 'glyphs/glyphs.html' with glyphs=glyphs %}
+{% block content %}
+    {% include 'users/user_menu.html' %}
+    {% include 'glyphs/glyphs.html' with glyphs=glyphs %}
+{% endblock %}
