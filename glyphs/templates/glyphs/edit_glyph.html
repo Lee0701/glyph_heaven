@@ -10,4 +10,9 @@
     <dt>Tags</dt>
     <dd><ul>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</ul></dd>
 </dl>
-<a href="{% url 'edit_glyph' id=glyph.id %}">Edit</a>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+</form>
+<a href="{% url 'glyph_detail' id=glyph.id %}">Cancel</a>

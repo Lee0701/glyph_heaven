@@ -1,8 +1,6 @@
 from django import forms
 from .models import Glyph, Tag
 
-from .image_funcs import upload_to
-
 class UploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.author = kwargs.pop('author')
@@ -36,3 +34,32 @@ class UploadForm(forms.ModelForm):
     class Meta:
         model = Glyph
         fields = ['image', 'kage', 'description', 'tags']
+
+class EditGlyphForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.glyph = kwargs.pop('glyph')
+        super(EditGlyphForm, self).__init__(*args, **kwargs)
+        self.initial['description'] = self.glyph.description
+
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+
+    def save(self, commit=True):
+        self.glyph.description = self.cleaned_data['description']
+        self.glyph.save(update_fields=['description'])
+        return self.glyph
+
+class EditTagForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.tag = kwargs.pop('tag')
+        super(EditTagForm, self).__init__(*args, **kwargs)
+        self.initial['kage'] = self.tag.kage
+        self.initial['description'] = self.tag.description
+    
+    kage = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+
+    def save(self, commit=True):
+        self.tag.kage = self.cleaned_data['kage']
+        self.tag.description = self.cleaned_data['description']
+        self.tag.save(update_fields=['kage', 'description'])
+        return self.tag

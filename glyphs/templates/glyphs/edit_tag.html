@@ -16,4 +16,9 @@
     <dt>Tagged By</dt>
     <dd><ul>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</ul></dd>
 </dl>
-<a href="{% url 'edit_tag' name=tag.name %}">Edit</a>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+</form>
+<a href="{% url 'tag_detail' name=tag.name %}">Cancel</a>
