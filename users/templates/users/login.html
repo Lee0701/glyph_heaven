@@ -1,5 +1,12 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit">
+    <label for="username">Username</label>
+    {{ form.username | add_class:'input' }}
+    <label for="password">Password</label>
+    {{ form.password | add_class:'input' }}
+    {% include 'theme/button_submit.html' with label='Login' %}
 </form>
+{% endblock %}

@@ -1,13 +1,16 @@
+{% extends 'base.html' %}
 
-<img src="{{ glyph.image_url }}">
-<dl>
-    <dt>Author</dt>
-    <dd>{{ glyph.author.username }}</dd>
-    <dt>Created at</dt>
-    <dd>{{ glyph.created_at|date:"Y-m-d" }}</dd>
-    <dt>Description</dt>
-    <dd><div>{{ glyph.description }}</div></dd>
-    <dt>Tags</dt>
-    <dd><ul>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</ul></dd>
-</dl>
-<a href="{% url 'edit_glyph' id=glyph.id %}">Edit</a>
+{% block content %}
+    <img src="{{ glyph.image_url }}">
+    <dl>
+        <dt>Author</dt>
+        <dd>{{ glyph.author.username }}</dd>
+        <dt>Created at</dt>
+        <dd>{{ glyph.created_at|date:"Y-m-d" }}</dd>
+        <dt>Description</dt>
+        <dd><div>{{ glyph.description }}</div></dd>
+        <dt>Tags</dt>
+        <dd><ul>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</ul></dd>
+    </dl>
+    <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_glyph' id=glyph.id %}">Edit</a>
+{% endblock %}

@@ -9,8 +9,12 @@
 
 <body>
     {% include 'theme/navbar.html' %}
-    {% block content %}
-    {% endblock %}
+    <div class="columns is-mobile is-centered">
+        <div class="column container is-max-desktop">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
 </body>
 
 </html>

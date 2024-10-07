@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'glyphs.apps.GlyphsConfig',
     'theme.apps.ThemeConfig',
 
+    'widget_tweaks',
     'django_browser_reload',
 
     'django.contrib.admin',
