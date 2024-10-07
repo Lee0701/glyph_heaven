@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-from .image_funcs import image_url, upload_to
+from .functions import image_url, upload_to
 
 # Create your models here.
 
