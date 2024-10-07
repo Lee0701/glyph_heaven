@@ -1,0 +1,22 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'home' %}">字體天國</a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>    
+    </div>
+
+    <div id="navbar-menu" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="#">About</a>
+            <a class="navbar-item" href="#">Services</a>
+            <a class="navbar-item" href="#">Contact</a>
+        </div>
+        <div class="navbar-end">
+            {% include 'users/user_menu.html' %}
+        </div>
+    </div>
+</nav>

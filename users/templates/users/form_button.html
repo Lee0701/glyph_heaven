@@ -1,6 +1,6 @@
-<form action="{% url url %}" method="{{ method | default:'get'}}">
+<form class="navbar-item" action="{% url url %}" method="{{ method | default:'get'}}">
     {% if method == 'post' %}
         {% csrf_token %}
     {% endif %}
-    <input type="submit" value="{{ label }}">
+    <button type="submit" class="is-ghost">{{ label }}</button>
 </form>
