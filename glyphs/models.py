@@ -10,11 +10,16 @@ class Tag(models.Model):
     author_name = models.CharField(max_length=100, blank=True)
     author_ip = models.GenericIPAddressField()
     name = models.CharField(max_length=100, primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    kage = models.TextField(blank=True)
     description = models.TextField(blank=True)
     tags = models.ManyToManyField('self', symmetrical=False, blank=True)
 
     def href(self):
         return f'/glyphs/tag/{self.name}'
+
+    def includes(self):
+        return Tag.objects.filter(tags=self)
 
 class Glyph(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -22,7 +27,6 @@ class Glyph(models.Model):
     author_ip = models.GenericIPAddressField()
     image = models.ImageField(upload_to=upload_to)
     created_at = models.DateTimeField(auto_now_add=True)
-    kage = models.TextField(blank=True)
     description = models.TextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
 

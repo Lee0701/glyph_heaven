@@ -7,8 +7,8 @@ from itertools import chain
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('id/<int:id>', views.detail, name='detail'),
-    path('tag/<str:tag>', views.tag, name='tag'),
+    path('id/<int:id>', views.glyph_detail, name='glyph_detail'),
+    path('tag/<str:tag>', views.tag_detail, name='tag_detail'),
     path('upload/', views.upload, name='upload'),
 ]
 

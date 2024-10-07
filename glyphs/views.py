@@ -8,14 +8,14 @@ def index(request):
     glyphs = Glyph.objects.all()
     return render(request, 'glyphs/index.html', {'glyphs': glyphs})
 
-def detail(request, id):
+def glyph_detail(request, id):
     glyph = get_object_or_404(Glyph, id=id)
-    return render(request, 'glyphs/detail.html', {'glyph': glyph})
+    return render(request, 'glyphs/glyph_detail.html', {'glyph': glyph})
 
-def tag(request, tag):
+def tag_detail(request, tag):
     tag = get_object_or_404(Tag, name=tag)
     glyphs = tag.glyph_set.all()
-    return render(request, 'glyphs/tag.html', {'tag': tag, 'glyphs': glyphs})
+    return render(request, 'glyphs/tag_detail.html', {'tag': tag, 'glyphs': glyphs})
 
 def upload(request):
     if request.method == 'POST':

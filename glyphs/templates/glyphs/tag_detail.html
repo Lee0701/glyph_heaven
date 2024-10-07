@@ -1,0 +1,18 @@
+
+{% include 'glyphs/glyphs.html' with glyphs=glyphs %}
+<dl>
+    <dt>Name</dt>
+    <dd>{{ tag.name }}</dd>
+    <dt>Author</dt>
+    <dd>{{ tag.author }}</dd>
+    <dt>Created at</dt>
+    <dd>{{ tag.created_at|date:"Y-m-d" }}</dd>
+    <dt>Kage</dt>
+    <dd><pre>{{ tag.kage }}</pre></dd>
+    <dt>Description</dt>
+    <dd><div>{{ tag.description }}</div></dd>
+    <dt>Has Tags</dt>
+    <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
+    <dt>Includes Tags</dt>
+    <dd>{% include 'glyphs/tags.html' with tags=tag.includes.all %}</dd>
+</dl>
