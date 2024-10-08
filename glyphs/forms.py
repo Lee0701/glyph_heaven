@@ -1,5 +1,6 @@
 from django import forms
 from .models import Glyph, Tag
+from .functions import normalize
 
 textarea_attrs = {'class': 'textarea', 'rows': 8}
 
@@ -20,7 +21,7 @@ class UploadForm(forms.ModelForm):
         glyph.author_ip = self.author_ip
         glyph.save(commit)
 
-        tags = self.cleaned_data['tags'].split()
+        tags = normalize(self.cleaned_data['tags'].strip()).split()
         for tagname in tags:
             tag, _ = Tag.objects.get_or_create(
                 name=tagname,
@@ -75,7 +76,7 @@ class EditGlyphForm(forms.Form):
         self.glyph.save(update_fields=['description'])
 
         self.glyph.tags.clear()
-        tags = self.cleaned_data['tags'].split()
+        tags = normalize(self.cleaned_data['tags'].strip()).split()
         for tagname in tags:
             tag, _ = Tag.objects.get_or_create(
                 name=tagname,
@@ -106,7 +107,7 @@ class EditTagForm(forms.Form):
         self.tag.save(update_fields=['kage', 'description'])
 
         self.tag.tags.clear()
-        tags = self.cleaned_data['tags'].split()
+        tags = normalize(self.cleaned_data['tags'].strip()).split()
         for tagname in tags:
             tag, _ = Tag.objects.get_or_create(
                 name=tagname,

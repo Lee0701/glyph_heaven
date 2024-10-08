@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from annoying.functions import get_object_or_None
 from glyph_heaven import settings
 from .models import Glyph, Tag
-from .functions import get_author_info
+from .functions import get_author_info, normalize
 from . import forms
 
 # Create your views here.
@@ -35,7 +35,7 @@ def tag_detail(request, name, page=1):
     return render(request, 'glyphs/tag_detail.html', {'form': form, 'tag': tag, 'glyphs': glyphs})
 
 def search(request):
-    query = request.GET.get('query', '')
+    query = normalize(request.GET.get('query', ''))
     if query == '':
         return redirect('index')
     return redirect('tag_detail', name=query)
@@ -77,6 +77,7 @@ def edit_glyph(request, id):
 
 def edit_tag(request, name):
     tag = get_object_or_404(Tag, name=name)
+    glyphs = tag.glyph_set.all()[:10]
     if request.method == 'POST':
         form = forms.EditTagForm(request.POST, tag=tag, author=get_author_info(request))
         if form.is_valid():
@@ -85,7 +86,7 @@ def edit_tag(request, name):
     else:
         form = forms.EditTagForm(tag=tag, author=get_author_info(request))
 
-    return render(request, 'glyphs/edit_tag.html', {'form': form, 'tag': tag})
+    return render(request, 'glyphs/edit_tag.html', {'form': form, 'tag': tag, 'glyphs': glyphs})
 
 def add_glyph_tag(request, id, name):
     author, author_name, author_ip = get_author_info(request)

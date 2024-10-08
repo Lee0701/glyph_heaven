@@ -1,6 +1,7 @@
 
 import os
 import hashlib
+import unicodedata
 from functools import partial
 
 def image_url(url):
@@ -43,3 +44,8 @@ def get_author_name(glyph_or_tag):
         return glyph_or_tag.author_name
     else:
         return glyph_or_tag.author_ip
+
+def normalize(s):
+    s = unicodedata.normalize('NFC', s)
+    s = s.lower()
+    return s.strip()
