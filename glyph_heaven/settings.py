@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-&h%ry*%cow3(r(iotn5p^iq(+cc2ulkp4+2reyiktyg+%+*72j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+]
 
 
 # Application definition
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'glyphs.apps.GlyphsConfig',
     'theme.apps.ThemeConfig',
 
+    'annoying',
     'widget_tweaks',
     'django_browser_reload',
 

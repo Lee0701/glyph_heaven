@@ -19,6 +19,8 @@ urlpatterns = [
     path('id/<int:id>/remove_tag/<str:name>/', views.remove_glyph_tag, name='remove_glyph_tag'),
     path('tag/<str:to_name>/add_tag/<str:name>/', views.add_tag_tag, name='add_tag_tag'),
     path('tag/<str:to_name>/remove_tag/<str:name>/', views.remove_tag_tag, name='remove_tag_tag'),
+
+    path('search/', views.search, name='search'),
 ]
 
 urlpatterns += chain.from_iterable([

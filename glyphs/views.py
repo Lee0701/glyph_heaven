@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from annoying.functions import get_object_or_None
 from .models import Glyph, Tag
 from .functions import get_author_info
 from . import forms
@@ -10,16 +11,28 @@ def index(request):
     return render(request, 'glyphs/index.html', {'glyphs': glyphs})
 
 def glyph_detail(request, id):
-    glyph = get_object_or_404(Glyph, id=id)
+    glyph = get_object_or_None(Glyph, id=id)
+    if glyph is None:
+        message = f'No glyph found with id {id}.'
+        return render(request, 'glyphs/404.html', {'message': message}, status=404)
     return render(request, 'glyphs/glyph_detail.html', {'glyph': glyph})
 
 def tag_detail(request, name):
-    tag = get_object_or_404(Tag, name=name)
+    tag = get_object_or_None(Tag, name=name)
+    if tag is None:
+        message = f'No tag found with name {name}.'
+        return render(request, 'glyphs/404.html', {'message': message}, status=404)
     glyphs = tag.glyph_set.all()
 
     form = forms.SimpleUploadForm(author=get_author_info(request), tag=tag)
 
     return render(request, 'glyphs/tag_detail.html', {'form': form, 'tag': tag, 'glyphs': glyphs})
+
+def search(request):
+    query = request.GET.get('query', '')
+    if query == '':
+        return redirect('index')
+    return redirect('tag_detail', name=query)
 
 def upload(request):
     if request.method == 'POST':

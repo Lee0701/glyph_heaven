@@ -11,9 +11,9 @@
 
     <div id="navbar-menu" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" href="#">About</a>
-            <a class="navbar-item" href="#">Services</a>
-            <a class="navbar-item" href="#">Contact</a>
+            <div class="navbar-item">
+                {% include 'glyphs/search_box.html' %}
+            </div>
         </div>
         <div class="navbar-end">
             {% include 'users/user_menu.html' %}
