@@ -98,6 +98,7 @@ if db_engine == 'mysql':
         "PASSWORD": getenv('MYSQL_PASSWORD'),
         "HOST": getenv('MYSQL_HOST'),
         "PORT": getenv('MYSQL_PORT'),
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 elif db_engine == 'sqlite':
     db_default = {
