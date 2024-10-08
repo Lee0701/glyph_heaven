@@ -105,7 +105,7 @@ def add_tag_tag(request, to_name, name):
     author_name = request.user.username if request.user.is_authenticated else ''
     author_ip = request.META['REMOTE_ADDR']
     tag = get_object_or_404(Tag, name=to_name)
-    tag, _ = Tag.objects.get_or_create(
+    t, _ = Tag.objects.get_or_create(
         name=name,
         defaults={'author': author, 'author_name': author_name, 'author_ip': author_ip}
     )

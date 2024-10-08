@@ -1,5 +1,5 @@
 <form action="{% url 'simple_upload' name=name %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit">
+    {% include 'glyphs/form_fields.html' with form=form %}
+    {% include 'theme/button_submit.html' with label='Upload' %}
 </form>

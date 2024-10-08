@@ -4,6 +4,6 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'glyphs/form_fields.html' with form=form %}
-        {% include 'theme/button_submit.html' with label='Submit' %}
+        {% include 'theme/button_submit.html' with label='Upload' %}
     </form>
 {% endblock %}
