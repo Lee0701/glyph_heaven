@@ -24,6 +24,9 @@ class Tag(models.Model):
     def author_displayname(self):
         return get_author_name(self)
 
+    class Meta:
+        ordering = ['name']
+
 class Glyph(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     author_name = models.CharField(max_length=100, blank=True)
