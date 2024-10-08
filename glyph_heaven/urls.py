@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import include, path
 from . import views
 
+from django.conf.urls.static import static
+from glyph_heaven import settings
+from itertools import chain
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('glyphs/', include('glyphs.urls')),
@@ -26,3 +30,7 @@ urlpatterns = [
     path('theme/', include('theme.urls')),
     path('__reload__/', include('django_browser_reload.urls')),
 ]
+
+urlpatterns += chain.from_iterable([
+    static('media/images/', document_root=settings.MEDIA_ROOT / 'images'),
+])
