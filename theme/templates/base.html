@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 
 <head>
     <title>字體天國</title>
@@ -9,8 +9,8 @@
 
 <body>
     {% include 'theme/navbar.html' %}
-    <div class="columns is-mobile is-centered">
-        <div class="column container is-max-desktop mx-4">
+    <div class="columns is-mobile is-centered mx-2">
+        <div class="column container is-max-desktop">
             {% block content %}
             {% endblock %}
         </div>
