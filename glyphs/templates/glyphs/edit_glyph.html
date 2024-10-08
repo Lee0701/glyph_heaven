@@ -16,7 +16,7 @@
     </dl>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
+        {% include 'glyphs/form_fields.html' with form=form %}
         {% include 'theme/button_submit.html' with label='Submit' %}
         <a class="button is-danger is-fullwidth mt-2" href="{% url 'glyph_detail' id=glyph.id %}">Cancel</a>
     </form>

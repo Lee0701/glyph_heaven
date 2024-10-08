@@ -1,6 +1,8 @@
 from django import forms
 from .models import Glyph, Tag
 
+textarea_attrs = {'class': 'textarea', 'rows': 8}
+
 class UploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.author, self.author_name, self.author_ip = kwargs.pop('author')
@@ -8,7 +10,7 @@ class UploadForm(forms.ModelForm):
         super(UploadForm, self).__init__(*args, **kwargs)
 
     image = forms.ImageField(required=True)
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
     tags = forms.CharField(required=True)
 
     def save(self, commit=True):
@@ -65,7 +67,7 @@ class EditGlyphForm(forms.Form):
         self.initial['description'] = self.glyph.description
         self.initial['tags'] = ' '.join(self.glyph.tags.values_list('name', flat=True))
 
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
     tags = forms.CharField(required=True)
 
     def save(self, commit=True):
@@ -94,8 +96,8 @@ class EditTagForm(forms.Form):
         self.initial['description'] = self.tag.description
         self.initial['tags'] = ' '.join(self.tag.tags.values_list('name', flat=True))
     
-    kage = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}), required=False)
+    kage = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
     tags = forms.CharField(required=True)
 
     def save(self, commit=True):

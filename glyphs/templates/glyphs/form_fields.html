@@ -1,0 +1,6 @@
+{% load widget_tweaks %}
+
+{% for field in form %}
+<label for="field.name">{{ field.label_tag }}</label>
+{{ field | add_class:'input' }}
+{% endfor %}
