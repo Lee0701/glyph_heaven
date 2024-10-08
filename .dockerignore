@@ -1,6 +1,5 @@
 *.env*
 data/
-static/
 media/
 logs/
 default.conf
