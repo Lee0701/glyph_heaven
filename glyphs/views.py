@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from annoying.functions import get_object_or_None
 from .models import Glyph, Tag
@@ -6,8 +7,10 @@ from . import forms
 
 # Create your views here.
 
-def index(request):
+def index(request, page=1):
     glyphs = Glyph.objects.all()
+    paginator = Paginator(glyphs, 20)
+    glyphs = paginator.get_page(page)
     return render(request, 'glyphs/index.html', {'glyphs': glyphs})
 
 def glyph_detail(request, id):

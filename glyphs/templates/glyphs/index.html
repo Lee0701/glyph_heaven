@@ -2,4 +2,19 @@
 
 {% block content %}
     {% include 'glyphs/glyphs.html' with glyphs=glyphs %}
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        {% if glyphs.has_previous %}
+            <a class="pagination-link" href="{% url 'index_paged' page=glyphs.previous_page_number %}">←</a>
+        {% else %}
+            <a class="pagination-link is-disabled" href="#">←</a>
+        {% endif %}
+        <a class="pagination-link is-current">
+            {{ glyphs.number }} / {{ glyphs.paginator.num_pages }}
+        </a>
+        {% if glyphs.has_next %}
+            <a class="pagination-link" href="{% url 'index_paged' page=glyphs.next_page_number %}">→</a>
+        {% else %}
+            <a class="pagination-link is-disabled" href="#">→</a>
+        {% endif %}
+    </nav>
 {% endblock %}
