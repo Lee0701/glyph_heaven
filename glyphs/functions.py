@@ -30,3 +30,17 @@ def upload_to(instance, filename):
 
     file_path = f'{path}/{prefix}/{filename}{ext}'
     return file_path
+
+def get_author_info(request):
+    author = request.user if request.user.is_authenticated else None
+    author_name = author.username if author else ''
+    author_ip = request.META['REMOTE_ADDR']
+    return author, author_name, author_ip
+
+def get_author_name(glyph_or_tag):
+    if glyph_or_tag.author:
+        return glyph_or_tag.author.username
+    elif glyph_or_tag.author_name:
+        return glyph_or_tag.author_name
+    else:
+        return glyph_or_tag.author_ip

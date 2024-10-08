@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-from .functions import image_url, upload_to
+from .functions import image_url, upload_to, get_author_name
 
 # Create your models here.
 
@@ -20,6 +20,9 @@ class Tag(models.Model):
 
     def rev_tags(self):
         return Tag.objects.filter(tags=self)
+    
+    def author_displayname(self):
+        return get_author_name(self)
 
 class Glyph(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -36,6 +39,9 @@ class Glyph(models.Model):
 
     def detail_url(self):
         return f'/glyphs/id/{self.id}'
+
+    def author_displayname(self):
+        return get_author_name(self)
 
     class Meta:
         ordering = ['-created_at']

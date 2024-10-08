@@ -3,9 +3,7 @@ from .models import Glyph, Tag
 
 class UploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author')
-        self.author_name = self.author.username
-        self.author_ip = kwargs.pop('author_ip')
+        self.author, self.author_name, self.author_ip = kwargs.pop('author')
 
         super(UploadForm, self).__init__(*args, **kwargs)
 
@@ -35,9 +33,7 @@ class UploadForm(forms.ModelForm):
 
 class SimpleUploadForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        self.author = kwargs.pop('author')
-        self.author_name = self.author.username
-        self.author_ip = kwargs.pop('author_ip')
+        self.author, self.author_name, self.author_ip = kwargs.pop('author')
         self.tag = kwargs.pop('tag')
 
         super(SimpleUploadForm, self).__init__(*args, **kwargs)
@@ -62,9 +58,7 @@ class SimpleUploadForm(forms.ModelForm):
 class EditGlyphForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.glyph = kwargs.pop('glyph')
-        self.author = kwargs.pop('author')
-        self.author_name = self.author.username
-        self.author_ip = kwargs.pop('author_ip')
+        self.author, self.author_name, self.author_ip = kwargs.pop('author')
 
         super(EditGlyphForm, self).__init__(*args, **kwargs)
 
@@ -92,9 +86,7 @@ class EditGlyphForm(forms.Form):
 class EditTagForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.tag = kwargs.pop('tag')
-        self.author = kwargs.pop('author')
-        self.author_name = self.author.username
-        self.author_ip = kwargs.pop('author_ip')
+        self.author, self.author_name, self.author_ip = kwargs.pop('author')
 
         super(EditTagForm, self).__init__(*args, **kwargs)
 
