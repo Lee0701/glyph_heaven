@@ -14,7 +14,7 @@ services:
       - db
     volumes:
       - ./.env:/usr/src/app/.env
-      - ./data/db.sqlite3:/usr/src/app/db.sqlite3
+      # - ./data/db.sqlite3:/usr/src/app/db.sqlite3
       - ./data/media:/usr/src/app/media
       - ./data/logs:/usr/src/app/logs
     restart: always
