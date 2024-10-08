@@ -14,9 +14,9 @@
         <dt>Description</dt>
         <dd><div>{{ tag.description }}</div></dd>
         <dt>Tags</dt>
-        <dd><ul>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</ul></dd>
+        <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
         <dt>Tagged By</dt>
-        <dd><ul>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</ul></dd>
+        <dd>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</dd>
     </dl>
     <form action="" method="post">
         {% csrf_token %}

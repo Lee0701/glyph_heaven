@@ -1,5 +1,7 @@
-{% for tag in tags %}
-    <li>
-        <a href="{{ tag.href }}">{{ tag.name }}</a>
+<ul class="columns is-mobile is-multiline mx-2 my-1">
+    {% for tag in tags %}
+    <li class="is-narrow mx-1">
+        <a class="tag is-info" href="{{ tag.href }}">{{ tag.name }}</a>
     </li>
-{% endfor %}
+    {% endfor %}
+</ul>

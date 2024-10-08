@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <img src="{{ glyph.image_url }}">
+    <div class="box p-0 mx-4">
+        <img class="container is-rounded" src="{{ glyph.image_url }}">
+    </div>
     <dl>
         <dt>Author</dt>
         <dd>{{ glyph.author_displayname }}</dd>
@@ -10,7 +12,7 @@
         <dt>Description</dt>
         <dd><div>{{ glyph.description }}</div></dd>
         <dt>Tags</dt>
-        <dd><ul>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</ul></dd>
+        <dd>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</dd>
     </dl>
     <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_glyph' id=glyph.id %}">Edit</a>
 {% endblock %}
