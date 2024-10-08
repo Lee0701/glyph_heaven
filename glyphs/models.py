@@ -44,5 +44,8 @@ class Glyph(models.Model):
     def author_displayname(self):
         return get_author_name(self)
 
+    def tag_list(self):
+        return ' '.join(self.tags.values_list('name', flat=True))
+
     class Meta:
         ordering = ['-created_at']

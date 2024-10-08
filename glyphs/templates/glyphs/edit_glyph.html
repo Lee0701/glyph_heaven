@@ -21,4 +21,5 @@
         {% include 'theme/button_submit.html' with label='Submit' %}
         <a class="button is-danger is-fullwidth mt-2" href="{% url 'glyph_detail' id=glyph.id %}">Cancel</a>
     </form>
+    {% include 'theme/drag_file_upload.html' with tags=glyph.tag_list %}
 {% endblock %}

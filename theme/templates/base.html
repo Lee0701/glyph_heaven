@@ -10,11 +10,12 @@
 <body>
     {% include 'theme/navbar.html' %}
     <div class="columns is-mobile is-centered mx-2">
-        <div class="column container is-max-desktop">
+        <main class="content column container is-max-desktop">
             {% block content %}
             {% endblock %}
-        </div>
+        </main>
     </div>
+    {% include 'theme/dragdrop_guide.html' %}
 </body>
 
 </html>

@@ -16,4 +16,5 @@
         <dd>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</dd>
     </dl>
     <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_glyph' id=glyph.id %}">Edit</a>
+    {% include 'theme/drag_file_upload.html' with tags=glyph.tag_list %}
 {% endblock %}

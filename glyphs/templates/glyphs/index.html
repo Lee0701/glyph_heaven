@@ -4,4 +4,5 @@
     <h1 class="title">Glyph list</h1>
     {% include 'glyphs/glyphs.html' with glyphs=glyphs %}
     {% include 'theme/pagination.html' with url='index_paged' content=glyphs %}
+    {% include 'theme/drag_file_upload.html' %}
 {% endblock %}

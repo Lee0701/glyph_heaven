@@ -12,7 +12,7 @@ class UploadForm(forms.ModelForm):
 
     image = forms.ImageField(required=True)
     description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
-    tags = forms.CharField(required=True)
+    tags = forms.CharField(required=False)
 
     def save(self, commit=True):
         glyph = super(UploadForm, self).save(commit=False)
@@ -69,7 +69,7 @@ class EditGlyphForm(forms.Form):
         self.initial['tags'] = ' '.join(self.glyph.tags.values_list('name', flat=True))
 
     description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
-    tags = forms.CharField(required=True)
+    tags = forms.CharField(required=False)
 
     def save(self, commit=True):
         self.glyph.description = self.cleaned_data['description']
@@ -99,7 +99,7 @@ class EditTagForm(forms.Form):
     
     kage = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
     description = forms.CharField(widget=forms.Textarea(attrs=textarea_attrs), required=False)
-    tags = forms.CharField(required=True)
+    tags = forms.CharField(required=False)
 
     def save(self, commit=True):
         self.tag.kage = self.cleaned_data['kage']

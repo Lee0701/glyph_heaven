@@ -22,6 +22,6 @@
             <dd>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</dd>
         </dl>
         <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_tag' name=tag.name %}">Edit</a>
-        {% include 'glyphs/simple_upload.html' with form=form name=tag.name %}
     {% endif %}
+    {% include 'theme/drag_file_upload.html' with tags=tag.name %}
 {% endblock %}

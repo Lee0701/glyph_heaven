@@ -25,4 +25,5 @@
         {% include 'theme/button_submit.html' with label='Submit' %}
         <a class="button is-danger is-fullwidth mt-2" href="{% url 'tag_detail' name=tag.name %}">Cancel</a>
     </form>
+    {% include 'theme/drag_file_upload.html' with tags=tag.name %}
 {% endblock %}
