@@ -3,6 +3,11 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
+    {% for error in form.non_field_errors %}
+        <div class="notification is-danger">
+            {{ error }}
+        </div>
+    {% endfor %}
     <label for="username">Username</label>
     {{ form.username | add_class:'input' }}
     <label for="password">Password</label>
