@@ -40,7 +40,7 @@ def get_author_info(request):
 def get_author_name(glyph_or_tag):
     if glyph_or_tag.author:
         return glyph_or_tag.author.username
-    elif glyph_or_tag.author_name:
+    elif glyph_or_tag.author_name and glyph_or_tag.author_name != '':
         return glyph_or_tag.author_name
     else:
         return glyph_or_tag.author_ip
