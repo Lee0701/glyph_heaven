@@ -1,0 +1,8 @@
+*.env*
+data/
+static/
+media/
+logs/
+default.conf
+db.sqlite3
+node_modules/

@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+from os import getenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +30,12 @@ SECRET_KEY = 'django-insecure-&h%ry*%cow3(r(iotn5p^iq(+cc2ulkp4+2reyiktyg+%+*72j
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+]
 
 # Application definition
 
@@ -45,12 +53,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
     'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,11 +93,24 @@ WSGI_APPLICATION = 'glyph_heaven.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+db_engine = getenv('DB_ENGINE')
+if db_engine == 'mysql':
+    db_default = {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": getenv('MYSQL_DATABASE'),
+        "USER": getenv('MYSQL_USER'),
+        "PASSWORD": getenv('MYSQL_PASSWORD'),
+        "HOST": getenv('MYSQL_HOST'),
+        "PORT": getenv('MYSQL_PORT'),
+    }
+elif db_engine == 'sqlite':
+    db_default = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+DATABASES = {
+    'default': db_default,
 }
 
 
@@ -132,8 +155,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-UPLOAD_DIR = 'data/images/'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

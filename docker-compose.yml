@@ -1,0 +1,31 @@
+services:
+  nginx:
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./data/media:/home/app/web/media:ro
+    restart: always
+  app:
+    build: .
+    image: glyph_heaven
+    depends_on:
+      - db
+    volumes:
+      - ./.env:/usr/src/app/.env
+      - ./data/db.sqlite3:/usr/src/app/db.sqlite3
+      - ./data/static:/usr/src/app/static
+      - ./data/media:/usr/src/app/media
+      - ./data/logs:/usr/src/app/logs
+    restart: always
+  db:
+    image: mariadb:10.5
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    restart: always

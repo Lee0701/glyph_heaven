@@ -24,5 +24,5 @@ urlpatterns = [
 ]
 
 urlpatterns += chain.from_iterable([
-    static('image/', document_root=settings.UPLOAD_DIR),
+    static('static/images/', document_root=settings.MEDIA_ROOT / 'images'),
 ])
