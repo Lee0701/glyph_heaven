@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1 class="title">Tag info</h1>
     {% include 'glyphs/glyphs.html' with glyphs=glyphs %}
-    <dl>
-        <dt>Name</dt>
-        <dd>{{ tag.name }}</dd>
-        <dt>Author</dt>
-        <dd>{{ tag.author_displayname }}</dd>
-        <dt>Created at</dt>
-        <dd>{{ tag.created_at|date:"Y-m-d" }}</dd>
-        <dt>Kage</dt>
-        <dd><pre>{{ tag.kage }}</pre></dd>
-        <dt>Description</dt>
-        <dd><div>{{ tag.description }}</div></dd>
-        <dt>Tags</dt>
-        <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
-        <dt>Tagged By</dt>
-        <dd>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</dd>
-    </dl>
-    <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_tag' name=tag.name %}">Edit</a>
-    {% include 'glyphs/simple_upload.html' with form=form name=tag.name %}
+    {% include 'theme/pagination.html' with url='tag_detail_paged' name=tag.name content=glyphs %}
+    {% if not glyphs.has_previous %}
+        <dl>
+            <dt>Name</dt>
+            <dd>{{ tag.name }}</dd>
+            <dt>Author</dt>
+            <dd>{{ tag.author_displayname }}</dd>
+            <dt>Created at</dt>
+            <dd>{{ tag.created_at|date:"Y-m-d" }}</dd>
+            <dt>Kage</dt>
+            <dd><pre>{{ tag.kage }}</pre></dd>
+            <dt>Description</dt>
+            <dd><div>{{ tag.description }}</div></dd>
+            <dt>Tags</dt>
+            <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
+            <dt>Tagged By</dt>
+            <dd>{% include 'glyphs/tags.html' with tags=tag.rev_tags.all %}</dd>
+        </dl>
+        <a class="button is-primary is-fullwidth mt-2" href="{% url 'edit_tag' name=tag.name %}">Edit</a>
+        {% include 'glyphs/simple_upload.html' with form=form name=tag.name %}
+    {% endif %}
 {% endblock %}

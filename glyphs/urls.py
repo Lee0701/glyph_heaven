@@ -7,6 +7,7 @@ urlpatterns = [
     path('page/<int:page>/', views.index, name='index_paged'),
     path('id/<int:id>/', views.glyph_detail, name='glyph_detail'),
     path('tag/<str:name>/', views.tag_detail, name='tag_detail'),
+    path('tag/<str:name>/page/<int:page>/', views.tag_detail, name='tag_detail_paged'),
     path('id/<int:id>/edit/', views.edit_glyph, name='edit_glyph'),
     path('tag/<str:name>/edit/', views.edit_tag, name='edit_tag'),
 

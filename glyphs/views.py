@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from annoying.functions import get_object_or_None
+from glyph_heaven import settings
 from .models import Glyph, Tag
 from .functions import get_author_info
 from . import forms
@@ -9,7 +10,7 @@ from . import forms
 
 def index(request, page=1):
     glyphs = Glyph.objects.all()
-    paginator = Paginator(glyphs, 20)
+    paginator = Paginator(glyphs, settings.PAGINATION_SIZE)
     glyphs = paginator.get_page(page)
     return render(request, 'glyphs/index.html', {'glyphs': glyphs})
 
@@ -20,12 +21,14 @@ def glyph_detail(request, id):
         return render(request, 'glyphs/404.html', {'message': message}, status=404)
     return render(request, 'glyphs/glyph_detail.html', {'glyph': glyph})
 
-def tag_detail(request, name):
+def tag_detail(request, name, page=1):
     tag = get_object_or_None(Tag, name=name)
     if tag is None:
         message = f'No tag found with name {name}.'
         return render(request, 'glyphs/404.html', {'message': message}, status=404)
     glyphs = tag.glyph_set.all()
+    paginator = Paginator(glyphs, settings.PAGINATION_SIZE)
+    glyphs = paginator.get_page(page)
 
     form = forms.SimpleUploadForm(author=get_author_info(request), tag=tag)
 

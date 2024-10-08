@@ -1,0 +1,23 @@
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    {% if content.has_previous %}
+        {% if name %}
+            <a class="pagination-link" href="{% url url name=name page=content.previous_page_number %}">←</a>
+        {% else %}
+            <a class="pagination-link" href="{% url url page=content.previous_page_number %}">←</a>
+        {% endif %}
+    {% else %}
+        <a class="pagination-link is-disabled">←</a>
+    {% endif %}
+    <a class="pagination-link is-current">
+        {{ content.number }} / {{ content.paginator.num_pages }}
+    </a>
+    {% if content.has_next %}
+        {% if name %}
+            <a class="pagination-link" href="{% url url name=name page=content.next_page_number %}">→</a>
+        {% else %}
+            <a class="pagination-link" href="{% url url page=content.next_page_number %}">→</a>
+        {% endif %}
+    {% else %}
+        <a class="pagination-link is-disabled">→</a>
+    {% endif %}
+</nav>
