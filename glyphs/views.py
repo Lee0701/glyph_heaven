@@ -10,6 +10,10 @@ from . import forms
 
 def index(request, page=1):
     glyphs = Glyph.objects.all()
+
+    if request.GET.get('filter', '') == 'uncategorized':
+        glyphs = glyphs.filter(tags__isnull=True)
+
     paginator = Paginator(glyphs, settings.PAGINATION_SIZE)
     glyphs = paginator.get_page(page)
     return render(request, 'glyphs/index.html', {'glyphs': glyphs})
