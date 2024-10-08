@@ -60,7 +60,7 @@ def simple_upload(request, name):
 def edit_glyph(request, id):
     glyph = get_object_or_404(Glyph, id=id)
     if request.method == 'POST':
-        form = forms.EditGlyphForm(request.POST, request.FILES, glyph=glyph, author=get_author_info(request))
+        form = forms.EditGlyphForm(request.POST, glyph=glyph, author=get_author_info(request))
         if form.is_valid():
             glyph = form.save()
             return redirect('glyph_detail', id=glyph.id)
@@ -82,9 +82,7 @@ def edit_tag(request, name):
     return render(request, 'glyphs/edit_tag.html', {'form': form, 'tag': tag})
 
 def add_glyph_tag(request, id, name):
-    author = request.user if request.user.is_authenticated else None
-    author_name = request.user.username if request.user.is_authenticated else ''
-    author_ip = request.META['REMOTE_ADDR']
+    author, author_name, author_ip = get_author_info(request)
     glyph = get_object_or_404(Glyph, id=id)
     tag, _ = Tag.objects.get_or_create(
         name=name,
@@ -101,9 +99,7 @@ def remove_glyph_tag(request, id, name):
     return redirect('glyph_detail', id=glyph.id)
 
 def add_tag_tag(request, to_name, name):
-    author = request.user if request.user.is_authenticated else None
-    author_name = request.user.username if request.user.is_authenticated else ''
-    author_ip = request.META['REMOTE_ADDR']
+    author, author_name, author_ip = get_author_info(request)
     tag = get_object_or_404(Tag, name=to_name)
     t, _ = Tag.objects.get_or_create(
         name=name,
