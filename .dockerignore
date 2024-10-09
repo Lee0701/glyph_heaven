@@ -3,5 +3,8 @@ static/
 data/
 media/
 logs/
+
+kage.tsv
+
 default.conf
 db.sqlite3
