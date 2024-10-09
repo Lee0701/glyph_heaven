@@ -13,6 +13,9 @@ for name, data in kage_data.items():
     kage.components.push(name, data)
 
 def render(data):
+    data = data.split('\n')
+    data = [line.strip() for line in data]
+    data = '$'.join(data)
     drawing = Drawing(size=(16, 16))
     drawing = kage.make_glyph_with_data(drawing, data)
     if drawing is not None:
