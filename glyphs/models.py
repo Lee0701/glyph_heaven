@@ -3,6 +3,8 @@ from users.models import User
 
 from .functions import image_url, upload_to, get_author_name
 
+from pycmarkgfm import gfm_to_html
+
 class Tag(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     author_name = models.CharField(max_length=100, blank=True)
@@ -21,6 +23,9 @@ class Tag(models.Model):
     
     def author_displayname(self):
         return get_author_name(self)
+
+    def description_html(self):
+        return gfm_to_html(self.description)
 
     class Meta:
         ordering = ['name']
@@ -43,6 +48,9 @@ class Glyph(models.Model):
 
     def author_displayname(self):
         return get_author_name(self)
+
+    def description_html(self):
+        return gfm_to_html(self.description)
 
     def tag_list(self):
         return ' '.join(self.tags.values_list('name', flat=True))

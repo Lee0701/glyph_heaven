@@ -11,7 +11,7 @@
         <dt>Created at</dt>
         <dd>{{ glyph.created_at|date:"Y-m-d" }}</dd>
         <dt>Description</dt>
-        <dd><div>{{ glyph.description }}</div></dd>
+        <dd><div>{{ glyph.description_html | safe }}</div></dd>
         <dt>Tags</dt>
         <dd>{% include 'glyphs/tags.html' with tags=glyph.tags.all %}</dd>
     </dl>

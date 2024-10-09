@@ -15,7 +15,7 @@
             <dt>Kage</dt>
             <dd><pre>{{ tag.kage }}</pre></dd>
             <dt>Description</dt>
-            <dd><div>{{ tag.description }}</div></dd>
+            <dd><div>{{ tag.description_html | safe }}</div></dd>
             <dt>Tags</dt>
             <dd>{% include 'glyphs/tags.html' with tags=tag.tags.all %}</dd>
             <dt>Tagged By</dt>
