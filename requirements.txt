@@ -7,3 +7,5 @@ mysqlclient==2.2.4
 whitenoise==6.7.0
 python-dotenv==1.0.1
 pycmarkgfm==1.2.1
+kage-engine @ git+https://github.com/Lee0701/kage-engine.git@6ca0b9a11c62bc8d8755c3660ad1b73c66a6acab
+svgwrite==1.4.3

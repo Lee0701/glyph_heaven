@@ -3,6 +3,7 @@ from users.models import User
 
 from .functions import image_url, upload_to, get_author_name
 
+from .kage_gen import render as kage_render
 from pycmarkgfm import gfm_to_html
 
 class Tag(models.Model):
@@ -20,7 +21,14 @@ class Tag(models.Model):
 
     def rev_tags(self):
         return Tag.objects.filter(tags=self)
-    
+
+    def svg(self):
+        svg = kage_render(self.kage)
+        if svg is not None:
+            return svg
+        else:
+            return self.name
+
     def author_displayname(self):
         return get_author_name(self)
 
