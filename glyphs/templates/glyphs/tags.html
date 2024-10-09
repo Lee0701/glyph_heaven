@@ -1,5 +1,5 @@
 <div class="columns is-mobile is-multiline mx-2 my-1">
     {% for tag in tags %}
-    <a class="tag is-info mx-1" href="{{ tag.href }}"><span>{{ tag.svg | safe }}</span></a>
+    <a class="tag is-info mx-1" href="{{ tag.href }}">{{ tag.svg | safe }}</a>
     {% endfor %}
 </div>
