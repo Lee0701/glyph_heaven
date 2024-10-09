@@ -1,4 +1,6 @@
 *.env*
+!docker.env*
+
 static/
 data/
 media/

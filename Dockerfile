@@ -26,6 +26,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .
+COPY docker.env .env
 COPY --from=build-frontend /src/static ./static
 COPY --from=build-kage-data /src/kage.tsv .
 
